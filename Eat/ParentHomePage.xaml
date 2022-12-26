@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.ParentHomePage"
+             xmlns:local="clr-namespace:Eat"
+             xmlns:homepage="clr-namespace:Eat.HomePage"
+             xmlns:userinfo="clr-namespace:Eat.UserInfo"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    
+    
+    <ContentPage.Content>
+        <Grid BackgroundColor="#FFFFFF" Padding="0" x:Name="rootGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="{x:Static homepage:UserPanel.UserBarHeight}"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <!--#region UserPanel-->
+            <Frame CornerRadius="{x:Static homepage:UserPanel.UserBarCornerRadius}" BackgroundColor="#E9EAEC" Padding ="0" Grid.Column="1" Grid.Row="1"  Grid.ColumnSpan="2" HasShadow="True"  xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="10">
+                <Grid Padding="{x:Static homepage:UserPanel.UserBarGridPadding}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="35*"/>
+                    </Grid.RowDefinitions>
+                    <Frame VerticalOptions="Start" HorizontalOptions="Start" CornerRadius="{x:Static homepage:UserPanel.UserBarPhotoCornerRadius}" IsClippedToBounds="true" Padding="0" Grid.Column="0" Grid.Row="1" >
+                        <Image Source="user.png"/>
+                    </Frame>
+                    <Label Text="{Binding NameAndSurname}"  HorizontalOptions="Start" TextColor="Black" FontSize ="{x:Static homepage:UserPanel.NameFontSize}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
+                    <Frame Padding ="{x:Static homepage:RoleBar.Padding}" BorderColor="Red" BackgroundColor ="Transparent" VerticalOptions="Start" HorizontalOptions="End" CornerRadius="{x:Static homepage:UserPanel.UserBarPhotoCornerRadius}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="{x:Static homepage:UserPanel.BalanceMargin}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="DisplayRoleSelection"/>
+                        </Frame.GestureRecognizers>
+                        <Label Text="{Binding SelectedRoleName}" FontSize="{x:Static homepage:RoleBar.FontSize}" FontAttributes="Bold" TextColor="Red"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+            <CollectionView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding Children}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static homepage:CollectionViewPanel.GridPadding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="47*"/>
+                                <ColumnDefinition Width="47*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame BackgroundColor="#E9EAEC" Padding ="0" HeightRequest="{x:Static homepage:ShortUserPanel.Height}" CornerRadius="{x:Static homepage:ShortUserPanel.CornerRadius}" HasShadow="True"  xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="5" Grid.Column="1" Grid.ColumnSpan="2">
+                                <Grid Padding="{x:Static homepage:ShortUserPanel.GridPadding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*"/>
+                                        <ColumnDefinition Width="70*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="90*"/>
+                                        <RowDefinition Height="5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OpenChildProfile" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                                    </Grid.GestureRecognizers>
+                                    <Frame VerticalOptions="Start" HorizontalOptions="Start" CornerRadius="{x:Static homepage:ShortUserPanel.PhotoCornerRadius}" IsClippedToBounds="true" Padding="0" Grid.Column="0" Grid.Row="1" >
+                                        <Image Source="user.png"/>
+                                    </Frame>
+                                    <Label VerticalOptions="Center" HorizontalOptions="Start"  FontSize="{x:Static homepage:ShortUserPanel.NameFontSize}" Text="{Binding NameAndSurname}" TextColor="Black" Padding="0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" >
+                                        
+                                    </Label>
+
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--#endregion-->
+          
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

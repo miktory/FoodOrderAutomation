@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<popup:PopupPage
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+xmlns:selectteacher="clr-namespace:Eat.SelectTeacher"
+x:Class="Eat.SelectTeacherPopUp">
+    <popup:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </popup:PopupPage.Animation>
+    <Frame BackgroundColor="White" HeightRequest="{x:Static selectteacher:SelectTeacherPopUp.Height}" WidthRequest="{x:Static selectteacher:SelectTeacherPopUp.Width}" CornerRadius="{x:Static selectteacher:SelectTeacherPopUp.CornerRadius}" Padding="0" VerticalOptions="Center" HorizontalOptions="Center">
+        <Grid BackgroundColor="White" Padding="{x:Static selectteacher:SelectTeacherPopUp.GridPadding}" RowSpacing="{x:Static selectteacher:SelectTeacherPopUp.GridRowSpacing}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Text="Выберите учителя" TextColor="Black" FontSize="{x:Static selectteacher:SelectTeacherPopUp.TitleFontSize}"/>
+            <Frame  BackgroundColor="Transparent" BorderColor="Transparent" HasShadow="False" HeightRequest="{x:Static selectteacher:CollectionFrame.Height}" CornerRadius="{x:Static selectteacher:CollectionFrame.CornerRadius}" Grid.Row="1" Padding="0">
+                <CollectionView ItemsSource="{Binding Teachers}" ItemsLayout="VerticalGrid" x:Name="TeacherCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="{x:Static selectteacher:CollectionFrame.GridPadding}" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{x:Static selectteacher:SelectionCircle.Width}"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SelectItem" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                                </Grid.GestureRecognizers>
+                                <Frame HasShadow="False" HeightRequest="{x:Static selectteacher:SelectionCircle.Height}" WidthRequest="{x:Static selectteacher:SelectionCircle.Width}" CornerRadius="{x:Static selectteacher:SelectionCircle.CornerRadius}" BackgroundColor="Transparent" BorderColor="{Binding SelectionColor}" HorizontalOptions="Center" VerticalOptions="Center" Padding="0">
+                                    <Frame IsVisible="{Binding IsSelected}" HasShadow="False" CornerRadius="{x:Static selectteacher:SelectionCircle.CornerRadius}" BackgroundColor="{Binding SelectionColor}"  HorizontalOptions="Start" VerticalOptions="Start" Margin="{x:Static selectteacher:SelectionCircle.InternalCircleMargin}">
+                                    </Frame>
+                                </Frame>
+                                <Label Text="{Binding Name}" FontSize="{x:Static selectteacher:CollectionFrame.RoleNameFontSize}" TextColor="Black" Grid.Column="1" Margin="{x:Static selectteacher:CollectionFrame.RoleNameMargin}" VerticalOptions="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </Frame>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="ОК" HorizontalOptions="End" Grid.Column="1" FontSize="{x:Static selectteacher:SelectTeacherPopUp.ButtonsFontSize}" TextColor="Gray">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SaveAndExit"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Grid>
+    </Frame>
+    
+</popup:PopupPage>

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.RequestPage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:editcategorypage="clr-namespace:Eat.Request"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF" RowSpacing="0" x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{x:Static editcategorypage:TopBar.Height}"/>
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+        <!--#region TopBar-->
+        <Frame>
+            <Frame.Background>
+                <!-- StartPoint defaults to (0,0) -->
+                <RadialGradientBrush Center="0.5,0.5" Radius="6">
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                     <GradientStop Color="#E9EAEC"
+                          Offset="0.4" />
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                </RadialGradientBrush>
+            </Frame.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{x:Static editcategorypage:TopBar.FirstRowHeight}"/>
+                    <RowDefinition Height="100*"/>
+                </Grid.RowDefinitions>
+                <Image Source="back_arrow.png" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="{x:Static editcategorypage:TopBar.BackArrowHeight}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Заявка" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="{x:Static editcategorypage:TopBar.FontSize}" />
+                <Frame VerticalOptions="End" HeightRequest="{x:Static editcategorypage:GradeSelectionFrame.Height}" CornerRadius="10" BackgroundColor ="#EF3124" Grid.Row="0" Grid.RowSpan="2" xct:ShadowEffect.Radius="8" xct:ShadowEffect.Color="Black" Padding="20,0,20,0">
+                    <Grid Padding="0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowGradeSelectionPopUp"/>
+                        </Grid.GestureRecognizers>
+                        <Label Text="{Binding GradeName}" FontSize="{x:Static editcategorypage:GradeSelectionFrame.FontSize}" TextColor="white" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        <Label Text="↓" FontAttributes="Bold" TextColor="white" HorizontalOptions="End" VerticalOptions="Center" FontSize="{x:Static editcategorypage:GradeSelectionFrame.FontSize}"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </Frame>
+        <!--#endregion-->
+        <Frame BackgroundColor="#ECECEC" Grid.Row="1" Margin="{x:Static editcategorypage:SelectionPanel.Margin}" CornerRadius="{x:Static editcategorypage:SelectionPanel.CornerRadius}" Padding="0">
+            <CollectionView ItemsSource="{Binding Students}" ItemsLayout="VerticalGrid" x:Name="StudentCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static editcategorypage:SelectionPanel.CollectionViewPadding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TagStudent" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                            </Grid.GestureRecognizers>
+                            <Frame BackgroundColor="#E9EAEC" Padding ="0" HeightRequest="{x:Static editcategorypage:ShortUserPanel.Height}" CornerRadius="{x:Static editcategorypage:ShortUserPanel.CornerRadius}" HasShadow="True"  xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="5">
+                                <Grid Padding="{x:Static editcategorypage:ShortUserPanel.GridPadding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*"/>
+                                        <ColumnDefinition Width="70*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="90*"/>
+                                        <RowDefinition Height="5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Frame HasShadow="False" HeightRequest="{x:Static editcategorypage:SelectionSquare.Height}" WidthRequest="{x:Static editcategorypage:SelectionSquare.Width}" BackgroundColor="Transparent"  BorderColor="{Binding SelectionColor}" HorizontalOptions="Center" VerticalOptions="Center" Padding="0" Grid.Column="0" Grid.Row="1">
+                                        <Frame IsVisible="{Binding IsSelected}" HasShadow="False" BackgroundColor="{Binding SelectionColor}"  HorizontalOptions="Start" VerticalOptions="Start" Margin="{x:Static editcategorypage:SelectionSquare.InternalSquareMargin}">
+                                        </Frame>
+                                    </Frame>
+                                    <Label VerticalOptions="Center" HorizontalOptions="Start"  FontSize="{x:Static editcategorypage:ShortUserPanel.NameFontSize}" Text="{Binding Name}" TextColor="Black" Padding="0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" >
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Frame>
+    </Grid>
+</ContentPage>

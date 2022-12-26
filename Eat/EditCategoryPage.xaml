@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.EditCategoryPage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:editcategorypage="clr-namespace:Eat.EditCategory"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF" RowSpacing="0" x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{x:Static editcategorypage:TopBar.Height}"/>
+            <RowDefinition Height="{x:Static editcategorypage:SearchBar.Height}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+   
+        </Grid.RowDefinitions>
+        <!--#region TopBar-->
+        <Frame>
+            <Frame.Background>
+                <!-- StartPoint defaults to (0,0) -->
+                <RadialGradientBrush Center="0.5,0.5" Radius="6">
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                     <GradientStop Color="#E9EAEC"
+                          Offset="0.4" />
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                </RadialGradientBrush>
+            </Frame.Background>
+            <Grid>
+                <Image Source="back_arrow.png" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="{x:Static editcategorypage:TopBar.BackArrowHeight}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="{Binding CategoryName}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="{x:Static editcategorypage:TopBar.FontSize}" />
+            </Grid>
+        </Frame>
+        <!--#endregion-->
+        <Frame BackgroundColor="#ECECEC" Grid.Row="1" Margin="{x:Static editcategorypage:SearchBar.Margin}" CornerRadius="{x:Static editcategorypage:SearchBar.CornerRadius}" Padding="0">
+            <Grid Padding="0" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="search.png" HorizontalOptions="Start" VerticalOptions="End"/>
+                <Entry HorizontalOptions="Fill" VerticalOptions="Center" Placeholder="Поиск" TextColor="Black" PlaceholderColor="#C4C9CC" Grid.Column="1" TextChanged="FilterItems" Grid.Row="0" FontSize="{x:Static editcategorypage:SearchBar.FontSize}"/>
+            </Grid>
+        </Frame>
+        <Frame BackgroundColor="#ECECEC" Grid.Row="2" Margin="{x:Static editcategorypage:SelectionPanel.Margin}" CornerRadius="{x:Static editcategorypage:SelectionPanel.CornerRadius}" Padding="0">
+            <CollectionView ItemsSource="{Binding DishList}" ItemsLayout="VerticalGrid, 2" x:Name="DishCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static editcategorypage:SelectionPanel.Padding}" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ShowEditPopUp" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                            </Grid.GestureRecognizers>
+                            <Frame HeightRequest="{x:Static editcategorypage:SelectionPanel.DishFrameHeight}" WidthRequest="{x:Static editcategorypage:SelectionPanel.DishFrameWidth}" CornerRadius="{x:Static editcategorypage:SelectionPanel.DishFrameCornerRadius}" HorizontalOptions="Fill" VerticalOptions="Center" Padding="0">
+                                <Grid>
+                                  
+                                    <Image Source="test.png" Margin="{x:Static editcategorypage:SelectionPanel.DishImageMargin}"/>
+                                </Grid>
+                            </Frame>
+                            <Label HorizontalOptions="Start" Text="{Binding Name}" Grid.Row="1" FontAttributes="Bold" FontSize="{x:Static editcategorypage:SelectionPanel.DishNameFontSize}" TextColor="#000"/>
+                            <Label HorizontalOptions="Start" Text="{Binding CostString}" Grid.Row="2" FontSize="{x:Static editcategorypage:SelectionPanel.DishDescriptionFontSize}" TextColor="#E74E44" FontAttributes="Bold"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Frame>
+        <Button VerticalOptions="Center" Clicked="ShowCreatePopUp" HeightRequest="{x:Static editcategorypage:AddButton.Height}" CornerRadius="{x:Static editcategorypage:AddButton.CornerRadius}" Text="+" FontAttributes="Bold" TextColor="#FFF" FontSize="{x:Static editcategorypage:AddButton.FontSize}" Padding="0" BackgroundColor="#EF3124" WidthRequest="{x:Static editcategorypage:AddButton.Width}" Margin="{x:Static editcategorypage:AddButton.Margin}" HorizontalOptions="Center" xct:ShadowEffect.Radius="2" xct:ShadowEffect.Color="Black" Grid.Row="3"/>
+    </Grid>
+</ContentPage>

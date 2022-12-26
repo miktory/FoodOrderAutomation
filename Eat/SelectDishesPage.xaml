@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.SelectDishesPage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:createmenu="clr-namespace:Eat.SelectDishes"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF" RowSpacing="0" x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{x:Static createmenu:TopBar.Height}"/>
+            <RowDefinition Height="{x:Static createmenu:SearchBar.Height}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+   
+        </Grid.RowDefinitions>
+        <!--#region TopBar-->
+        <Frame>
+            <Frame.Background>
+                <!-- StartPoint defaults to (0,0) -->
+                <RadialGradientBrush Center="0.5,0.5" Radius="6">
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                     <GradientStop Color="#E9EAEC"
+                          Offset="0.4" />
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                </RadialGradientBrush>
+            </Frame.Background>
+            <Grid>
+                <Image Source="back_arrow.png" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="{x:Static createmenu:TopBar.BackArrowHeight}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="{Binding CategoryName}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="{x:Static createmenu:TopBar.FontSize}" />
+            </Grid>
+        </Frame>
+        <!--#endregion-->
+        <Frame BackgroundColor="#ECECEC" Grid.Row="1" Margin="{x:Static createmenu:SearchBar.Margin}" CornerRadius="{x:Static createmenu:SearchBar.CornerRadius}" Padding="0">
+            <Grid Padding="0" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="search.png" HorizontalOptions="Start" VerticalOptions="End"/>
+                <Entry HorizontalOptions="Fill" VerticalOptions="Center" Placeholder="Поиск" TextColor="Black" PlaceholderColor="#C4C9CC" Grid.Column="1" TextChanged="FilterItems" Grid.Row="0" FontSize="{x:Static createmenu:SearchBar.FontSize}"/>
+            </Grid>
+        </Frame>
+        <Frame BackgroundColor="#ECECEC" Grid.Row="2" Margin="{x:Static createmenu:SelectionPanel.Margin}" CornerRadius="{x:Static createmenu:SelectionPanel.CornerRadius}" Padding="0">
+            <CollectionView ItemsSource="{Binding DishList}" ItemsLayout="VerticalGrid, 2" x:Name="DishCollectionView" SelectionChanged="DishCollectionView_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static createmenu:SelectionPanel.Padding}" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Frame HeightRequest="{x:Static createmenu:SelectionPanel.DishFrameHeight}" WidthRequest="{x:Static createmenu:SelectionPanel.DishFrameWidth}" CornerRadius="{x:Static createmenu:SelectionPanel.DishFrameCornerRadius}" HorizontalOptions="Fill" VerticalOptions="Center" Padding="0">
+                                <Grid>
+                                    <Image Source="test.png" Margin="{x:Static createmenu:SelectionPanel.DishImageMargin}"/>
+                                    <Button Clicked="SelectDish" BindingContext="{Binding .}" BackgroundColor="{Binding SelectionColor}" Opacity="0.3" x:Name="SelectionFrame"/>
+                                </Grid>
+                            </Frame>
+                            <Label HorizontalOptions="Start" Text="{Binding Name}" Grid.Row="1" FontAttributes="Bold" FontSize="{x:Static createmenu:SelectionPanel.DishNameFontSize}" TextColor="#000"/>
+                            <Label HorizontalOptions="Start" Text="{Binding CostString}" Grid.Row="2" FontSize="{x:Static createmenu:SelectionPanel.DishDescriptionFontSize}" TextColor="#E74E44" FontAttributes="Bold"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Frame>
+    </Grid>
+</ContentPage>

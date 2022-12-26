@@ -1,0 +1,96 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Fonts\AGENCYR.TTF" />
+    <None Remove="Resources\Fonts\YaldeviColombo-SemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\AGENCYR.TTF" />
+    <EmbeddedResource Include="Resources\Fonts\YaldeviColombo-SemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="7.0.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="EditRolesPopUp.xaml.cs">
+      <DependentUpon>EditRolesPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ReportPage.xaml.cs">
+      <DependentUpon>ReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserEditPopUp.xaml.cs">
+      <DependentUpon>UserEditPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UserCreatePopUp.xaml.cs">
+      <DependentUpon>UserCreatePopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SelectUserPage.xaml.cs">
+      <DependentUpon>SelectUserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="EditGradePage.xaml.cs">
+      <DependentUpon>EditGradePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="RequestPage.xaml.cs">
+      <DependentUpon>RequestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SelectTeacherPopUp.xaml.cs">
+      <DependentUpon>SelectTeacherPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SelectGradePopUp.xaml.cs">
+      <DependentUpon>SelectGradePopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ServiceMenuPage.xaml.cs">
+      <DependentUpon>ServiceMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SelectRolePopUp.xaml.cs">
+      <DependentUpon>SelectRolePopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ShowDishPopUp.xaml.cs">
+      <DependentUpon>ShowDishPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SelectDishesPage.xaml.cs">
+      <DependentUpon>SelectDishesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="DishCreatePopUp.xaml.cs">
+      <DependentUpon>DishCreatePopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CreateMenuPage.xaml.cs">
+      <DependentUpon>CreateMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SelectMenuPopUp.xaml.cs">
+      <DependentUpon>SelectMenuPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ParentHomePage.xaml.cs">
+      <DependentUpon>ParentHomePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="DishEditPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditCategoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MainPage1.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

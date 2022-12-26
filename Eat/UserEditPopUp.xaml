@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<popup:PopupPage HasKeyboardOffset="False"
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+xmlns:editcategorypage="clr-namespace:Eat.EditUser"
+x:Class="Eat.EditUserPopUp">
+    <popup:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </popup:PopupPage.Animation>
+    <Frame BackgroundColor="White" HeightRequest="{x:Static editcategorypage:EditUserPopUp.Height}" WidthRequest="{x:Static editcategorypage:EditUserPopUp.Width}" CornerRadius="{x:Static editcategorypage:EditUserPopUp.CornerRadius}" Padding="0" VerticalOptions="Center" HorizontalOptions="Center">
+            <Grid Padding="{x:Static editcategorypage:EditUserPopUp.Padding}" RowSpacing="{x:Static editcategorypage:EditUserPopUp.RowSpacing}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="100*"/>
+                </Grid.RowDefinitions>
+                <Label VerticalOptions="Start" HorizontalOptions="Center" TextColor="#000" Text="Изменить" FontSize="{x:Static editcategorypage:EditUserPopUp.TitleFontSize}" FontAttributes="Bold"/>
+               <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Text="ID: " Grid.Column="0" Margin="0" TextColor="#000"/>
+                    <Label VerticalOptions="Center" FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Text="{Binding SelectedUser.Id}" Grid.Column="1" TextColor="DarkGray" Margin="0" ClassId="UserLogin"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Text="Логин: " Grid.Column="0" Margin="0" TextColor="#000"/>
+                    <Entry FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Grid.Column="1" Text="{Binding Login}" Margin="0" TextChanged="EditUser" TextColor="DarkGray" ClassId="UserLogin"/>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                       <ColumnDefinition Width="40*"/>
+                       <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" TextColor="#000" Text="Пароль: " Grid.Column="0" Margin="0"/>
+                    <Entry FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Grid.Column="1" Text="{Binding Password}" TextColor="DarkGray" TextChanged="EditUser" IsPassword="True" ClassId="UserPassword" />
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" TextColor="#000" FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Text="Имя: " Grid.Column="0" Margin="0"/>
+                    <Entry FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" TextColor="DarkGray" Grid.Column="1" Text="{Binding SelectedUser.Name}" TextChanged="EditUser" ClassId="UserName"/>
+                </Grid>
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" TextColor="#000" Text="Фамилия: " Grid.Column="0" Margin="0"/>
+                    <Entry FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Text="{Binding SelectedUser.Surname}" TextColor="DarkGray" Grid.Column="1" TextChanged="EditUser" ClassId="UserSurname"/>
+                </Grid>
+                 <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" TextColor="#000" Text="Отчество: " Grid.Column="0" Margin="0"/>
+                    <Entry FontSize="{x:Static editcategorypage:EditUserPopUp.EntryFontSize}" Grid.Column="1" TextColor="DarkGray" Text="{Binding SelectedUser.Patronymic}" TextChanged="EditUser" ClassId="UserPatronymic"/>
+                </Grid>
+                 <Grid Grid.Row="7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame WidthRequest="{x:Static editcategorypage:EditUserPopUp.Width}" CornerRadius="{x:Static editcategorypage:EditUserPopUp.CornerRadius}" VerticalOptions="Fill" HorizontalOptions="Center" BackgroundColor="#EF3124" Padding="{x:Static editcategorypage:EditUserPopUp.SaveButtonPadding}" Grid.Column="0">
+                        <Label Text="Обновить" FontSize="{x:Static editcategorypage:EditUserPopUp.SaveButtonFontSize}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#FFF"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="UpdateUser"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame WidthRequest="{x:Static editcategorypage:EditUserPopUp.Width}" CornerRadius="{x:Static editcategorypage:EditUserPopUp.CornerRadius}" VerticalOptions="Fill" HorizontalOptions="Center" BackgroundColor="#EF3124" Padding="{x:Static editcategorypage:EditUserPopUp.SaveButtonPadding}" Grid.Column="1">
+                        <Label Text="Изменить баланс" FontSize="{x:Static editcategorypage:EditUserPopUp.SaveButtonFontSize}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#FFF"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="UpdateBalance"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+                 <Grid Grid.Row="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame WidthRequest="{x:Static editcategorypage:EditUserPopUp.Width}" CornerRadius="{x:Static editcategorypage:EditUserPopUp.CornerRadius}" VerticalOptions="Fill" HorizontalOptions="Center" BackgroundColor="#EF3124" Padding="{x:Static editcategorypage:EditUserPopUp.SaveButtonPadding}" Grid.Column="0">
+                        <Label Text="Изменить роли" FontSize="{x:Static editcategorypage:EditUserPopUp.SaveButtonFontSize}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#FFF"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ChangeRoles"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame WidthRequest="{x:Static editcategorypage:EditUserPopUp.Width}" CornerRadius="{x:Static editcategorypage:EditUserPopUp.CornerRadius}" VerticalOptions="Fill" HorizontalOptions="Center" BackgroundColor="#EF3124" Padding="{x:Static editcategorypage:EditUserPopUp.SaveButtonPadding}" Grid.Column="1">
+                        <Label Text="Создать связь" FontSize="{x:Static editcategorypage:EditUserPopUp.SaveButtonFontSize}" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#FFF"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ModifyUsersRelations"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+                <Image Source="delete.png" VerticalOptions="End" HorizontalOptions="Center" HeightRequest="{x:Static editcategorypage:EditUserPopUp.DeleteButtonHeight}" WidthRequest="{x:Static editcategorypage:EditUserPopUp.DeleteButtonWidth}" Grid.Row="9">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="DeleteUser"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+        </Frame>
+</popup:PopupPage>

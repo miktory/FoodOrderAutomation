@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.ServiceMenuPage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:servicemenu="clr-namespace:Eat.ServiceMenu"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF" RowSpacing="0" x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{x:Static servicemenu:TopBar.Height}"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="Auto"/>
+   
+        </Grid.RowDefinitions>
+        <!--#region TopBar-->
+        <Frame>
+            <Frame.Background>
+                <!-- StartPoint defaults to (0,0) -->
+                <RadialGradientBrush Center="0.5,0.5" Radius="6">
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                    <GradientStop Color="#E9EAEC"
+                          Offset="0.4" />
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                </RadialGradientBrush>
+            </Frame.Background>
+            <Grid>
+                <Image Source="back_arrow.png" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="{x:Static servicemenu:TopBar.BackArrowHeight}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Сервисное меню" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="{x:Static servicemenu:TopBar.FontSize}" />
+            </Grid>
+        </Frame>
+        <!--#endregion-->
+        <Frame BackgroundColor="White" Grid.Row="1" Padding="{x:Static servicemenu:SelectionPanel.FramePadding}">
+            <CollectionView ItemsSource="{Binding Settings}" ItemsLayout="VerticalGrid" x:Name="SettingCollectionView" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static servicemenu:SelectionPanel.GridPadding}">
+                            <Button Text="{Binding Name}" TextColor="Black" FontSize="{x:Static servicemenu:SelectionPanel.FontSize}" Clicked="OnTapped" CommandParameter="{Binding .}" BackgroundColor="#E9EAEC"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Frame>
+    </Grid>
+</ContentPage>
