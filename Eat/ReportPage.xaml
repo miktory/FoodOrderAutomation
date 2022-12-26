@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.ReportPage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:report="clr-namespace:Eat.Report"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF" RowSpacing="0" x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{x:Static report:TopBar.Height}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--#region TopBar-->
+        <Frame>
+            <Frame.Background>
+                <!-- StartPoint defaults to (0,0) -->
+                <RadialGradientBrush Center="0.5,0.5" Radius="6">
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                     <GradientStop Color="#E9EAEC"
+                          Offset="0.4" />
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                </RadialGradientBrush>
+            </Frame.Background>
+            <Grid>
+                <Image Source="back_arrow.png" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="{x:Static report:TopBar.BackArrowHeight}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Отчёт" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="{x:Static report:TopBar.FontSize}" />
+            </Grid>
+        </Frame>
+        <!--#endregion-->
+        <Frame BackgroundColor="#ECECEC" Grid.Row="1" Margin="{x:Static report:SelectionPanel.Margin}" CornerRadius="{x:Static report:SelectionPanel.CornerRadius}" Padding="0">
+            <CollectionView ItemsSource="{Binding Orders}" ItemsLayout="VerticalGrid" x:Name="OrderCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static report:SelectionPanel.CollectionViewPadding}" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80*"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenCategory" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                            </Grid.GestureRecognizers>
+                            <Frame BackgroundColor="White" Padding="20,10,20,10" Grid.Row="1" Grid.RowSpan="1" CornerRadius="{x:Static report:CategoryFrame.CornerRadius}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ShowOrderInfo" CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid Padding="0">
+                                    <Grid Padding="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label HorizontalOptions="Center" Text="{Binding Info}" TextColor="{Binding SelectionColor}" FontSize="{x:Static report:ContextFrame.FontSize}"/>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                            <Frame BackgroundColor="#EF3124" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="{x:Static report:CategoryFrame.CornerRadius}" Padding="20,15,20,15">
+                                <Grid Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding GroupName}" VerticalOptions="Center" Grid.Column="0" FontSize="{x:Static report:CategoryFrame.NameFontSize}" TextColor="White"/>
+                                    <Label Text=">" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" FontSize="{x:Static report:CategoryFrame.NameFontSize}" TextColor="White"/>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+        <Button VerticalOptions="Center" Clicked="ViewFullReport" HeightRequest="{x:Static report:ReportButton.Height}" CornerRadius="{x:Static report:ReportButton.CornerRadius}" Text="≡" FontAttributes="Bold" TextColor="#FFF" FontSize="{x:Static report:ReportButton.FontSize}"  BackgroundColor="#EF3124" Margin="{x:Static report:ReportButton.Margin}" HorizontalOptions="Center" xct:ShadowEffect.Radius="2" xct:ShadowEffect.Color="Black" Grid.Row="2"/>
+    </Grid>
+</ContentPage>

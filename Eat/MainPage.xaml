@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.MainPage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:loginpage="clr-namespace:Eat.LoginPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="{x:Static loginpage:Logo.Height}"/>
+            <RowDefinition Height="{x:Static loginpage:LogPassPanel.Height}"/>
+            <RowDefinition Height="{x:Static loginpage:LoginButton.Height}"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>
+            <Image Source="logo.png" Grid.Row="0" Grid.Column="1"  VerticalOptions="Center" HorizontalOptions="Center"/>
+        </Grid>
+        <Grid  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"  Grid.RowSpan="2" BackgroundColor="Blue" IsVisible="False"></Label>
+            <Frame Grid.Row="0" Grid.Column="1"  CornerRadius="{x:Static loginpage:LogPassPanel.CornerRadius}" BackgroundColor="#E9EAEC" Margin="{x:Static loginpage:LogPassPanel.GridPadding}" BorderColor="Transparent" Padding="0">
+                <Entry Placeholder="Логин" FontSize="{x:Static loginpage:LogPassPanel.FontSize}" PlaceholderColor="#C4C9CC" TextColor="Black"  Margin="{x:Static loginpage:LogPassPanel.GridPadding}" FontFamily="YC_SB" x:Name="loginBar"/>
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="1"   BackgroundColor="#E9EAEC" CornerRadius="{x:Static loginpage:LogPassPanel.CornerRadius}" Margin="{x:Static loginpage:LogPassPanel.GridPadding}" BorderColor="Transparent" Padding="0">
+                <Entry Placeholder="Пароль"  IsPassword="True" FontSize="{x:Static loginpage:LogPassPanel.FontSize}" PlaceholderColor="#C4C9CC" TextColor="Black" Margin="{x:Static loginpage:LogPassPanel.GridPadding}" FontFamily="YC_SB" x:Name="passwordBar" />
+            </Frame>
+            <Label Grid.Row="0" Grid.Column="2"  Grid.RowSpan="2" BackgroundColor="Blue" IsVisible="False"></Label>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="24*"/>
+            </Grid.RowDefinitions>
+            <Frame BackgroundColor="#EF3124" Grid.Row="0" Grid.Column="1" CornerRadius ="{x:Static loginpage:LoginButton.CornerRadius}" xct:ShadowEffect.Radius="5" xct:ShadowEffect.Color="Black" Margin="{x:Static loginpage:LogPassPanel.GridPadding}" Padding="0">
+                <Label Text="Вход" FontSize="{x:Static loginpage:LoginButton.FontSize}" TextColor="#FFF" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="YC_SB"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+        <!--
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" BackgroundColor="Yellow"></Label>
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BackgroundColor="Blue"></Label>
+        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BackgroundColor="Red"></Label>
+        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" BackgroundColor="Green"></Label>
+        <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" BackgroundColor="Purple"></Label>
+        -->
+    </Grid>
+</ContentPage>

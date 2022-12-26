@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.EditGradePage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:editcategorypage="clr-namespace:Eat.EditGrade"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF" RowSpacing="0" x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+        <!--#region TopBar-->
+        <Frame>
+            <Frame.Background>
+                <!-- StartPoint defaults to (0,0) -->
+                <RadialGradientBrush Center="0.5,0.5" Radius="6">
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                     <GradientStop Color="#E9EAEC"
+                          Offset="0.4" />
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                </RadialGradientBrush>
+            </Frame.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{x:Static editcategorypage:TopBar.FirstRowHeight}"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="back_arrow.png" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="{x:Static editcategorypage:TopBar.BackArrowHeight}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Классы" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="{x:Static editcategorypage:TopBar.FontSize}" />
+                <Frame VerticalOptions="End" HeightRequest="{x:Static editcategorypage:GradeSelectionFrame.Height}" CornerRadius="10" BackgroundColor ="#EF3124" Grid.Row="1" xct:ShadowEffect.Radius="8" xct:ShadowEffect.Color="Black" Padding="20,0,20,0">
+                    <Grid Padding="0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowGradeSelectionPopUp"/>
+                        </Grid.GestureRecognizers>
+                        <Label Text="{Binding GradeName}" FontSize="{x:Static editcategorypage:GradeSelectionFrame.FontSize}" TextColor="white" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        <Label Text="↓" FontAttributes="Bold" TextColor="white" HorizontalOptions="End" VerticalOptions="Center" FontSize="{x:Static editcategorypage:GradeSelectionFrame.FontSize}"/>
+                    </Grid>
+                </Frame>
+                <Frame VerticalOptions="End" HeightRequest="{x:Static editcategorypage:GradeSelectionFrame.Height}" CornerRadius="10" BackgroundColor ="#EF3124" Grid.Row="2" xct:ShadowEffect.Radius="8" xct:ShadowEffect.Color="Black" Padding="20,0,20,0">
+                    <Grid Padding="0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowTeacherSelectionPopUp"/>
+                        </Grid.GestureRecognizers>
+                        <Label Text="{Binding TeacherName}" FontSize="{x:Static editcategorypage:GradeSelectionFrame.FontSize}" TextColor="white" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        <Label Text="↓" FontAttributes="Bold" TextColor="white" HorizontalOptions="End" VerticalOptions="Center" FontSize="{x:Static editcategorypage:GradeSelectionFrame.FontSize}"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </Frame>
+        <!--#endregion-->
+        <Frame BackgroundColor="#ECECEC" Grid.Row="1" Margin="{x:Static editcategorypage:SelectionPanel.Margin}" CornerRadius="{x:Static editcategorypage:SelectionPanel.CornerRadius}" Padding="0">
+            <CollectionView ItemsSource="{Binding Students}" ItemsLayout="VerticalGrid" x:Name="StudentCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static editcategorypage:SelectionPanel.CollectionViewPadding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Frame BackgroundColor="#E9EAEC" Padding ="0" HeightRequest="{x:Static editcategorypage:ShortUserPanel.Height}" CornerRadius="{x:Static editcategorypage:ShortUserPanel.CornerRadius}" HasShadow="True"  xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="5">
+                                <Grid Padding="{x:Static editcategorypage:ShortUserPanel.GridPadding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70*"/>
+                                        <ColumnDefinition Width="30*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="90*"/>
+                                        <RowDefinition Height="5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label VerticalOptions="Center" HorizontalOptions="Start"  FontSize="{x:Static editcategorypage:ShortUserPanel.NameFontSize}" Text="{Binding Name}" TextColor="Black" Padding="0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
+                                    <Image Source="delete.png" VerticalOptions="End" HorizontalOptions="Center" HeightRequest="{x:Static editcategorypage:EditPanelPopUp.DeleteButtonHeight}" WidthRequest="{x:Static editcategorypage:EditPanelPopUp.DeleteButtonWidth}"  Grid.Column="1"  Grid.Row="1">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DeleteStudent" CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+        <Button VerticalOptions="Center" Clicked ="OpenUserSelector" HeightRequest="{x:Static editcategorypage:AddButton.Height}" CornerRadius="{x:Static editcategorypage:AddButton.CornerRadius}" Text="+" FontAttributes="Bold" TextColor="#FFF" FontSize="{x:Static editcategorypage:AddButton.FontSize}" Padding="0" BackgroundColor="#EF3124" WidthRequest="{x:Static editcategorypage:AddButton.Width}" Margin="{x:Static editcategorypage:AddButton.Margin}" HorizontalOptions="Center" xct:ShadowEffect.Radius="2" xct:ShadowEffect.Color="Black" Grid.Row="2"/>
+    </Grid>
+</ContentPage>

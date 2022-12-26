@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eat.SelectUserPage"
+             xmlns:local="clr-namespace:Eat" 
+             xmlns:selectuser="clr-namespace:Eat.SelectUser"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid BackgroundColor="#FFFF" RowSpacing="0" x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{x:Static selectuser:TopBar.Height}"/>
+            <RowDefinition Height="{x:Static selectuser:SearchBar.Height}"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--#region TopBar-->
+        <Frame>
+            <Frame.Background>
+                <!-- StartPoint defaults to (0,0) -->
+                <RadialGradientBrush Center="0.5,0.5" Radius="6">
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                     <GradientStop Color="#E9EAEC"
+                          Offset="0.4" />
+                    <GradientStop Color="#EF3124"
+                          Offset="0.1" />
+                </RadialGradientBrush>
+            </Frame.Background>
+            <Grid>
+                <Image Source="back_arrow.png" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="{x:Static selectuser:TopBar.BackArrowHeight}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Выберите пользователя" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="{x:Static selectuser:TopBar.FontSize}" />
+            </Grid>
+        </Frame>
+        <!--#endregion-->
+        <Frame BackgroundColor="#ECECEC" Grid.Row="1" Margin="{x:Static selectuser:SearchBar.Margin}" CornerRadius="{x:Static selectuser:SearchBar.CornerRadius}" Padding="0">
+            <Grid Padding="0" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="search.png" HorizontalOptions="Start" VerticalOptions="End"/>
+                <Entry HorizontalOptions="Fill" VerticalOptions="Center" Placeholder="Поиск" TextColor="Black" PlaceholderColor="#C4C9CC" Grid.Column="1" TextChanged="FilterItems" Grid.Row="0" FontSize="{x:Static selectuser:SearchBar.FontSize}"/>
+            </Grid>
+        </Frame>
+        <Frame BackgroundColor="#ECECEC" Grid.Row="2" Margin="{x:Static selectuser:SelectionPanel.Margin}" CornerRadius="{x:Static selectuser:SelectionPanel.CornerRadius}" Padding="0">
+            <CollectionView ItemsSource="{Binding Users}" ItemsLayout="VerticalGrid" x:Name="UserCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="{x:Static selectuser:SelectionPanel.CollectionViewPadding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SelectUser" CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                            </Grid.GestureRecognizers>
+                            <Frame BackgroundColor="#E9EAEC" Padding ="0" HeightRequest="{x:Static selectuser:ShortUserPanel.Height}" CornerRadius="{x:Static selectuser:ShortUserPanel.CornerRadius}" HasShadow="True"  xct:ShadowEffect.Color="Black" xct:ShadowEffect.Radius="5">
+                                <Grid Padding="{x:Static selectuser:ShortUserPanel.GridPadding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*"/>
+                                        <ColumnDefinition Width="70*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="90*"/>
+                                        <RowDefinition Height="5*"/>
+                                    </Grid.RowDefinitions>
+                                    <Frame VerticalOptions="Start" HorizontalOptions="Start" CornerRadius="{x:Static selectuser:ShortUserPanel.PhotoCornerRadius}" IsClippedToBounds="true" Padding="0" Grid.Column="0" Grid.Row="1" >
+                                        <Image Source="user.png"/>
+                                    </Frame>
+                                    <Label VerticalOptions="Center" HorizontalOptions="Start"  FontSize="{x:Static selectuser:ShortUserPanel.NameFontSize}" Text="{Binding Name}" TextColor="Black" Padding="0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" >
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+        <Button VerticalOptions="Center" IsVisible="{Binding IsEditable}"  Clicked ="CreateUser" HeightRequest="{x:Static selectuser:AddButton.Height}" CornerRadius="{x:Static selectuser:AddButton.CornerRadius}" Text="+" FontAttributes="Bold" TextColor="#FFF" FontSize="{x:Static selectuser:AddButton.FontSize}" Padding="0" BackgroundColor="#EF3124" WidthRequest="{x:Static selectuser:AddButton.Width}" Margin="{x:Static selectuser:AddButton.Margin}" HorizontalOptions="Center" xct:ShadowEffect.Radius="2" xct:ShadowEffect.Color="Black" Grid.Row="3"/>
+    </Grid>
+</ContentPage>
